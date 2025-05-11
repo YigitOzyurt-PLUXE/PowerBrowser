@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerBrowser Logo Generator</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+        .logo-container {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4a6cf7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #3a5ce5;
+        }
+        .instructions {
+            margin-top: 20px;
+            max-width: 600px;
+            text-align: center;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>PowerBrowser Logo</h1>
+    <div class="logo-container">
+        <svg id="logo" width="300" height="300" viewBox="0 0 300 300">
+            <!-- Background Circle -->
+            <circle cx="150" cy="150" r="140" fill="#4a6cf7" />
+            
+            <!-- Power Symbol -->
+            <path d="M150,60 L150,150 M110,60 L190,60" stroke="white" stroke-width="20" stroke-linecap="round" />
+            
+            <!-- Globe/Web Lines -->
+            <circle cx="150" cy="150" r="90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="5" />
+            <ellipse cx="150" cy="150" rx="90" ry="45" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="5" />
+            <line x1="60" y1="150" x2="240" y2="150" stroke="rgba(255,255,255,0.7)" stroke-width="5" />
+            <line x1="150" y1="60" x2="150" y2="240" stroke="rgba(255,255,255,0.7)" stroke-width="5" />
+            
+            <!-- Lightning Bolt (Power) -->
+            <path d="M160,120 L130,170 L160,170 L140,220" stroke="yellow" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+            
+            <!-- Outer Ring -->
+            <circle cx="150" cy="150" r="140" fill="none" stroke="white" stroke-width="10" />
+        </svg>
+    </div>
+    
+    <button id="download-button">Download Logo</button>
+    
+    <div class="instructions">
+        <p>Click the button above to download the PowerBrowser logo.</p>
+        <p>After downloading, place the logo.png file in the images folder of your PowerBrowser project.</p>
+    </div>
+    
+    <script>
+        document.getElementById('download-button').addEventListener('click', function() {
+            // Create a canvas element
+            const canvas = document.createElement('canvas');
+            canvas.width = 300;
+            canvas.height = 300;
+            const ctx = canvas.getContext('2d');
+            
+            // Draw white background
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Convert SVG to image
+            const svg = document.getElementById('logo');
+            const svgData = new XMLSerializer().serializeToString(svg);
+            const img = new Image();
+            
+            img.onload = function() {
+                // Draw the image onto the canvas
+                ctx.drawImage(img, 0, 0);
+                
+                // Convert canvas to data URL and trigger download
+                const dataURL = canvas.toDataURL('image/png');
+                const a = document.createElement('a');
+                a.href = dataURL;
+                a.download = 'logo.png';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            };
+            
+            img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
+        });
+    </script>
+</body>
+</html>

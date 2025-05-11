@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerBrowser - Secure and Dynamic</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="browser-container">
+        <div class="browser-header">
+            <div class="logo-container">
+                <img src="images/logo.svg" alt="PowerBrowser Logo" class="logo">
+                <span class="logo-text">PowerBrowser</span>
+            </div>
+            <div class="address-bar">
+                <div class="control-buttons">
+                    <button id="back-button" class="control-button"><i class="fas fa-arrow-left"></i></button>
+                    <button id="forward-button" class="control-button"><i class="fas fa-arrow-right"></i></button>
+                    <button id="refresh-button" class="control-button"><i class="fas fa-redo-alt"></i></button>
+                    <button id="home-button" class="control-button"><i class="fas fa-home"></i></button>
+                </div>
+                <div class="url-container">
+                    <div class="secure-icon"><i class="fas fa-lock"></i></div>
+                    <input type="text" id="url-input" placeholder="Enter web address or search">
+                    <button id="search-button"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="browser-actions">
+                    <button id="bookmark-button" class="action-button"><i class="fas fa-bookmark"></i></button>
+                    <button id="settings-button" class="action-button"><i class="fas fa-cog"></i></button>
+                    <button id="security-button" class="action-button"><i class="fas fa-shield-alt"></i></button>
+                    <button id="about-button" class="action-button"><i class="fas fa-info-circle"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="tabs-container">
+            <div class="tab active">
+                <span class="tab-title">New Tab</span>
+                <button class="tab-close"><i class="fas fa-times"></i></button>
+            </div>
+            <button id="new-tab-button"><i class="fas fa-plus"></i></button>
+        </div>
+        <div class="browser-content">
+            <div class="start-page">
+                <div class="search-container">
+                    <img src="images/logo-large.svg" alt="PowerBrowser Logo" class="large-logo">
+                    <h1>PowerBrowser</h1>
+                    <p>Secure, Fast and Dynamic Browser</p>
+                    <div class="search-box">
+                        <input type="text" id="search-input" placeholder="Search the web or enter URL">
+                        <button id="main-search-button"><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="quick-links">
+                        <h3>Quick Access</h3>
+                        <div class="links-grid">
+                            <div class="quick-link">
+                                <a href="#" class="link-icon"><i class="fab fa-google"></i></a>
+                                <span>Google</span>
+                            </div>
+                            <div class="quick-link">
+                                <a href="#" class="link-icon"><i class="fab fa-youtube"></i></a>
+                                <span>YouTube</span>
+                            </div>
+                            <div class="quick-link">
+                                <a href="#" class="link-icon"><i class="fab fa-twitter"></i></a>
+                                <span>Twitter</span>
+                            </div>
+                            <div class="quick-link">
+                                <a href="#" class="link-icon"><i class="fab fa-instagram"></i></a>
+                                <span>Instagram</span>
+                            </div>
+                            <div class="quick-link">
+                                <a href="#" class="link-icon"><i class="fab fa-facebook"></i></a>
+                                <span>Facebook</span>
+                            </div>
+                            <div class="quick-link">
+                                <a href="#" class="link-icon"><i class="fab fa-linkedin"></i></a>
+                                <span>LinkedIn</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="security-info">
+                    <h3><i class="fas fa-shield-alt"></i> Security Status</h3>
+                    <p>PowerBrowser is actively protecting your data.</p>
+                    <div class="security-stats">
+                        <div class="stat">
+                            <span class="stat-number">0</span>
+                            <span class="stat-label">Trackers Blocked</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">0</span>
+                            <span class="stat-label">Ads Blocked</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Security Score</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <iframe id="browser-frame" src="about:blank" style="display: none;"></iframe>
+        </div>
+        <div class="browser-footer">
+            <div class="status-info">
+                <span id="connection-status"><i class="fas fa-lock"></i> Secure Connection</span>
+                <span id="privacy-status"><i class="fas fa-eye-slash"></i> Privacy Protection Active</span>
+            </div>
+            <div class="performance-info">
+                <span id="memory-usage"><i class="fas fa-memory"></i> Memory: 100MB</span>
+                <span id="cpu-usage"><i class="fas fa-microchip"></i> CPU: 2%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>PowerBrowser Settings</h2>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-section">
+                    <h3>Genel</h3>
+                    <div class="setting-item">
+                        <span>Başlangıç sayfası</span>
+                        <input type="text" name="startPage" value="PowerBrowser Ana Sayfa">
+                    </div>
+                    <div class="setting-item">
+                        <span>Yeni sekme sayfası</span>
+                        <select name="newTabPage">
+                            <option value="home" selected>PowerBrowser Ana Sayfa</option>
+                            <option value="blank">Boş Sayfa</option>
+                            <option value="custom">Özel URL</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <span>Arama motoru</span>
+                        <select name="searchEngine">
+                            <option value="google" selected>Google</option>
+                            <option value="bing">Bing</option>
+                            <option value="duckduckgo">DuckDuckGo</option>
+                            <option value="yandex">Yandex</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h3>Gizlilik ve Güvenlik</h3>
+                    <div class="setting-item">
+                        <span>Çerezleri engelle</span>
+                        <label class="switch">
+                            <input type="checkbox" name="blockCookies" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <span>İzleyicileri engelle</span>
+                        <label class="switch">
+                            <input type="checkbox" name="blockTrackers" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <span>Reklamları engelle</span>
+                        <label class="switch">
+                            <input type="checkbox" name="blockAds" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <span>HTTPS zorunlu</span>
+                        <label class="switch">
+                            <input type="checkbox" name="forceHttps" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h3>Görünüm</h3>
+                    <div class="setting-item">
+                        <span>Tema</span>
+                        <select name="theme">
+                            <option value="light" selected>Açık</option>
+                            <option value="dark">Koyu</option>
+                            <option value="system">Sistem</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <span>Yazı boyutu</span>
+                        <select name="fontSize">
+                            <option value="small">Küçük</option>
+                            <option value="medium" selected>Orta</option>
+                            <option value="large">Büyük</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="save-settings">Kaydet</button>
+                <button class="cancel-settings">İptal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Security Modal -->
+    <div id="security-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Güvenlik Merkezi</h2>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="security-overview">
+                    <div class="security-score">
+                        <div class="score-circle">
+                            <span>100%</span>
+                        </div>
+                        <p>Güvenlik Puanı</p>
+                    </div>
+                    <div class="security-details">
+                        <div class="security-detail">
+                            <i class="fas fa-lock"></i>
+                            <div>
+                                <h4>Bağlantı Güvenliği</h4>
+                                <p>Tüm bağlantılarınız şifreleniyor</p>
+                            </div>
+                            <span class="status-good">Güvenli</span>
+                        </div>
+                        <div class="security-detail">
+                            <i class="fas fa-user-shield"></i>
+                            <div>
+                                <h4>Kimlik Koruması</h4>
+                                <p>Kimlik bilgileriniz güvende</p>
+                            </div>
+                            <span class="status-good">Aktif</span>
+                        </div>
+                        <div class="security-detail">
+                            <i class="fas fa-eye-slash"></i>
+                            <div>
+                                <h4>İzleme Koruması</h4>
+                                <p>İzleyiciler engelleniyor</p>
+                            </div>
+                            <span class="status-good">Aktif</span>
+                        </div>
+                        <div class="security-detail">
+                            <i class="fas fa-shield-virus"></i>
+                            <div>
+                                <h4>Zararlı Yazılım Koruması</h4>
+                                <p>Zararlı siteler engelleniyor</p>
+                            </div>
+                            <span class="status-good">Aktif</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="security-actions">
+                    <button class="security-action-button">
+                        <i class="fas fa-broom"></i>
+                        <span>Clear Browsing History</span>
+                    </button>
+                    <button class="security-action-button">
+                        <i class="fas fa-cookie-bite"></i>
+                        <span>Clear Cookies</span>
+                    </button>
+                    <button class="security-action-button">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Run Security Scan</span>
+                    </button>
+                    <button class="security-action-button">
+                        <i class="fas fa-fingerprint"></i>
+                        <span>Incognito Mode</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="about-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>About Us</h2>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="about-content">
+                    <img src="images/logo-large.svg" alt="PowerBrowser Logo" class="about-logo">
+                    <h2>PowerBrowser</h2>
+                    <p class="version">Version 1.0.2</p>
+                    <p>PowerBrowser is a secure, fast, and dynamic web browser. It protects user data and provides a modern interface.</p>
+                    
+                    <h3>Features</h3>
+                    <ul class="features">
+                        <li>Modern and elegant user interface</li>
+                        <li>Light and dark theme support</li>
+                        <li>Tab management</li>
+                        <li>Google search integration</li>
+                        <li>Tracker and ad blocking</li>
+                        <li>System resource monitoring</li>
+                        <li>Security features</li>
+                    </ul>
+                    
+                    <p class="copyright">&copy; 2025 PowerBrowser. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Empty Tab Template -->
+    <template id="empty-tab-template">
+        <div class="empty-tab">
+            <img src="images/logo-large.svg" alt="PowerBrowser Logo" class="empty-tab-logo">
+            <h2>Empty Tab</h2>
+            <p>You can use the quick access links below to visit a new page or enter a URL in the address bar.</p>
+            
+            <div class="quick-actions">
+                <div class="quick-action-button" data-url="https://www.google.com">
+                    <i class="fab fa-google"></i>
+                    <span>Google</span>
+                </div>
+                <div class="quick-action-button" data-url="https://www.youtube.com">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube</span>
+                </div>
+                <div class="quick-action-button" data-url="https://www.twitter.com">
+                    <i class="fab fa-twitter"></i>
+                    <span>Twitter</span>
+                </div>
+                <div class="quick-action-button" data-url="https://www.instagram.com">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </div>
+                <div class="quick-action-button" data-url="https://www.facebook.com">
+                    <i class="fab fa-facebook"></i>
+                    <span>Facebook</span>
+                </div>
+                <div class="quick-action-button" data-url="https://www.linkedin.com">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                </div>
+            </div>
+            
+            <p class="copyright">&copy; 2025 PowerBrowser. All rights reserved.</p>
+        </div>
+    </template>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>
